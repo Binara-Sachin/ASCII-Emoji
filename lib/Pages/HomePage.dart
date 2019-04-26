@@ -55,15 +55,15 @@ class HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.favorite, color: Colors.white,),
               tooltip: "Go to Favorites",
-              onPressed: _onPushFavorite(),
+              onPressed: () => _onPushFavorite(),
             ),
             Container(width: 15.0),
           ],
-      );
+        );
       default:
         return new AppBar(
           title: new Text(widget.drawerItemsMain[_selectedDrawerIndex].title),
-      );
+        );
     }
   }
   
@@ -73,10 +73,7 @@ class HomePageState extends State<HomePage> {
   }
 
   _onPushFavorite() {
-    //TODO
-    if(_selectedDrawerIndex==-1){
-      setState(() => _selectedDrawerIndex = 1);
-    }
+    setState(() => _selectedDrawerIndex = 1);
   }
 
   @override
