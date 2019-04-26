@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:ascii_emoji/Pages/LicenseInfo.dart';
+
 class SettingsFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,14 @@ class SettingsFragment extends StatelessWidget {
         ),
         ListTile(
           title: Text(
-            "Licence info",
+            "License info",
             style: TextStyle(fontSize: 16.0),
           ),
-          onTap: null,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LicenceInfo()),
+          ),
+      
         ),  
       ],
     );
