@@ -4,12 +4,16 @@ import 'package:ascii_emoji/Libraries/DatabaseManager.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   DatabaseManager database = DatabaseManager.instance;
-  
+
   @override
   Widget build(BuildContext context) {
-
     database.startDatabase();
 
     return MaterialApp(

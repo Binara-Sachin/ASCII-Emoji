@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:ascii_emoji/Fragments/Home.dart';
-import 'package:ascii_emoji/Fragments/Favorites.dart';
-import 'package:ascii_emoji/Fragments/Settings.dart';
+import 'package:ascii_emoji/Libraries/ListViewBuilder.dart';
+
+import 'package:ascii_emoji/Pages/FavoritesPage.dart';
+import 'package:ascii_emoji/Pages/SettingsPage.dart';
+
+final bool sortByCountFromSettings = true;
 
 class DrawerItem{
   String title;
@@ -26,58 +29,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  int _selectedDrawerIndex = 0;
 
-  _getFragmentWidget(int position) {
-    switch (position) {
-      case 0:
-        return new HomeFragment();
-      case 1:
-        return new FavoritesFragment();
-      case 2:
-        return new Text("Upgrade to Pro");
-      case 3:
-        return new SettingsFragment();
-      case 4:
-        return new Text("Feedback");
-      default:
-        return new Text("Error");
-    }
-  }
-
-  _getAppBarWidget(int position) {
-    switch (position) {
-      case 0:
-        return new AppBar(
-          title: new Text(widget.drawerItemsMain[_selectedDrawerIndex].title),
-          elevation: 0.0,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.favorite, color: Colors.white,),
-              tooltip: "Go to Favorites",
-              onPressed: () => _onPushFavorite(),
-            ),
-            Container(width: 15.0),
-          ],
-        );
-      default:
-        return new AppBar(
-          title: new Text(widget.drawerItemsMain[_selectedDrawerIndex].title),
-        );
-    }
-  }
-  
-  _onSelectItem(int index) {
-    setState(() => _selectedDrawerIndex = index);
-    Navigator.of(context).pop();
-  }
-
-  _onPushFavorite() {
-    setState(() => _selectedDrawerIndex = 1);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  _getDrawerOptionsWidget() {
     var drawerOptions = <Widget>[];
 
     for (var i = 0; i < widget.drawerItemsMain.length; i++) {
@@ -86,28 +39,104 @@ class HomePageState extends State<HomePage> {
         new ListTile(
           leading: new Icon(drawerItem.icon),
           title: new Text(drawerItem.title),
-          selected: i == _selectedDrawerIndex,
           onTap: () => _onSelectItem(i),
         )
       );
     }
 
-    return new Scaffold(
-      appBar: _getAppBarWidget(_selectedDrawerIndex),
-      drawer: new Drawer(
-        child: new Column(
-          children: <Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: new Text("ASCII Emoji", style: TextStyle(fontSize: 20.0),), 
-              accountEmail: null
+    return drawerOptions;
+  }
+  
+  _onSelectItem(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pop(context);
+        break;
+      case 1:
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FavoritesPage()),
+        );
+        break;
+      case 3:
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
+        );
+        break;
+    }
+  }
+
+  _onPushFavorite() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FavoritesPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 4,
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: new Text("ASCII Emoji"),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: "All"),
+              Tab(text: "Happy"),
+              Tab(text: "Sad"),
+              Tab(text: "Other"),
+            ],
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.favorite, color: Colors.white,),
+              tooltip: "Go to Favorites",
+              onPressed: () => _onPushFavorite(),
             ),
-            new Column(
-              children: drawerOptions
+            Container(width: 15.0),
+          ],
+        ),
+        drawer: new Drawer(
+          child: new Column(
+            children: <Widget>[
+              new UserAccountsDrawerHeader(
+                accountName: new Text("ASCII Emoji", style: TextStyle(fontSize: 20.0),), 
+                accountEmail: null
+              ),
+              new Column(
+                children: _getDrawerOptionsWidget(),
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            ListViewBuilder(
+              favoritesOnly: false,
+              sortByCount: sortByCountFromSettings,
+            ),
+            ListViewBuilder(
+              favoritesOnly: false,
+              includeTag: "Happy",
+              sortByCount: sortByCountFromSettings,
+            ),
+            ListViewBuilder(
+              favoritesOnly: false,
+              includeTag: "Sad",
+              sortByCount: sortByCountFromSettings,
+            ),
+            ListViewBuilder(
+              favoritesOnly: false,
+              includeTag: "Other",
+              sortByCount: sortByCountFromSettings,
             ),
           ],
         ),
       ),
-      body: _getFragmentWidget(_selectedDrawerIndex),
     );  
   }
 }
