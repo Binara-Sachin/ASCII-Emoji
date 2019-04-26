@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
   final drawerItemsMain = [
     new DrawerItem("ASCII Emoji", Icons.filter_vintage),
     new DrawerItem("Favorites", Icons.favorite),
-    new DrawerItem("Upgrade to Pro", Icons.favorite_border),
+    new DrawerItem("Upgrade to Pro", Icons.polymer),
     new DrawerItem("Settings", Icons.settings),
     new DrawerItem("Send Feedback", Icons.feedback),
   ];
@@ -105,7 +105,7 @@ class HomePageState extends State<HomePage> {
             children: <Widget>[
               new UserAccountsDrawerHeader(
                 accountName: new Text("ASCII Emoji", style: TextStyle(fontSize: 20.0),), 
-                accountEmail: null
+                accountEmail: null,
               ),
               new Column(
                 children: _getDrawerOptionsWidget(),
