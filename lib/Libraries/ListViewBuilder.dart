@@ -1,5 +1,6 @@
-//import 'package:ascii_emoji/Assets/Emoticons.dart';
 import 'package:ascii_emoji/Libraries/DatabaseManager.dart';
+
+import 'package:ascii_emoji/Assets/GlobalData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,10 +9,9 @@ DatabaseManager database = DatabaseManager.instance;
 
 class ListViewBuilder extends StatefulWidget {
   final bool favoritesOnly;
-  final bool sortByCount;
   final String includeTag;
 
-  const ListViewBuilder({Key key, this.favoritesOnly, this.includeTag, this.sortByCount}) : super(key: key);
+  const ListViewBuilder({Key key, this.favoritesOnly, this.includeTag}) : super(key: key);
 
   @override
   _ListViewBuilderState createState() => _ListViewBuilderState();
@@ -22,14 +22,18 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
   List<Emoticon> _displayList = emoticons;
 
   Widget _buildListView() {
+
     if (widget.favoritesOnly){
       _displayList = _displayList.where((i) => i.favorite).toList();
     }
     if (widget.includeTag != null){
        _displayList = _displayList.where((i) => i.tags.contains(widget.includeTag)).toList();
     }
-    if (widget.sortByCount){
+    if (globalSortByUsage){
        _displayList.sort((b, a) => a.count.compareTo(b.count));
+    }
+    if (globalShowFavoritesOnTop){
+       _displayList.sort((b, a) => (a.favorite ? 1:0).compareTo(b.favorite ? 1:0));
     }
 
     return ListView.builder(

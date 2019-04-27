@@ -149,7 +149,7 @@ class DatabaseManager {
   startDatabase() async {
     _initDatabase();
     emoticons = await queryAllEmoticons();
-    if (emoticons.length==0) {
+    if (emoticons.length<10) {
       for (int i=0; i<sampleEmoticonsList.length; i++){
         Emoticon emo = new Emoticon(
           id: i+1,

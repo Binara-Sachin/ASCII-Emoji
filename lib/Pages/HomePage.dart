@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:ascii_emoji/Libraries/ListViewBuilder.dart';
+import 'package:ascii_emoji/Libraries/SharedPreferencesClass.dart';
 
 import 'package:ascii_emoji/Pages/FavoritesPage.dart';
 import 'package:ascii_emoji/Pages/SettingsPage.dart';
-
-final bool sortByCountFromSettings = true;
 
 class DrawerItem{
   String title;
@@ -43,7 +42,6 @@ class HomePageState extends State<HomePage> {
         )
       );
     }
-
     return drawerOptions;
   }
   
@@ -117,22 +115,18 @@ class HomePageState extends State<HomePage> {
           children: [
             ListViewBuilder(
               favoritesOnly: false,
-              sortByCount: sortByCountFromSettings,
             ),
             ListViewBuilder(
               favoritesOnly: false,
               includeTag: "Happy",
-              sortByCount: sortByCountFromSettings,
             ),
             ListViewBuilder(
               favoritesOnly: false,
               includeTag: "Sad",
-              sortByCount: sortByCountFromSettings,
             ),
             ListViewBuilder(
               favoritesOnly: false,
               includeTag: "Other",
-              sortByCount: sortByCountFromSettings,
             ),
           ],
         ),

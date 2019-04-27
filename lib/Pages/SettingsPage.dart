@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ascii_emoji/Libraries/SharedPreferencesClass.dart';
+
+import 'package:ascii_emoji/Assets/GlobalData.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -20,8 +23,16 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(fontSize: 16.0),
             ),
             trailing: Switch(
-              value: true,
-              onChanged: null,
+              value: globalSortByUsage,
+              onChanged: (value) async {
+                await SharedPreferencesManager().setSortByUsage(value);
+                print("Value changed");
+                setState((){
+                  globalSortByUsage = value;
+                });
+              },
+              activeTrackColor: Colors.lightBlueAccent, 
+              activeColor: Colors.lightBlue,
             ),
           ),
           ListTile(
@@ -30,8 +41,15 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(fontSize: 16.0),
             ),
             trailing: Switch(
-              value: false,
-              onChanged: null,
+              value: globalShowFavoritesOnTop,
+              onChanged: (value) async {
+                await SharedPreferencesManager().setShowFavoritesOnTop(value);
+                setState((){
+                  globalShowFavoritesOnTop = value;
+                });
+              },
+              activeTrackColor: Colors.lightBlueAccent, 
+              activeColor: Colors.lightBlue,
             ),
           ),
           Padding(
@@ -58,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsPage()),
+              MaterialPageRoute(builder: (context) => LicensePage()),
             ),
           ),  
         ],
