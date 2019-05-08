@@ -1,24 +1,27 @@
-class SampleEmoticon{
-  String text;
+class Emoticon {
+  String emoji;
   List<String> tags;
+  int count = 0;
+  int id = null;
+  bool favorite = false;
 
-  SampleEmoticon(this.text, this.tags);
+  Emoticon(this.emoji, this.tags);
 }
 
-final sampleEmoticonsList = [
-  new SampleEmoticon("¯\_(ツ)_/¯", ["Other"]),
-  new SampleEmoticon("( ͡° ͜ʖ ͡°)", ["Happy"]),
-  new SampleEmoticon("ಠ_ಠ", ["Sad"]),
-  new SampleEmoticon("(╯°□°）╯︵ ┻━┻", ["Sad", "Other"]), 
-  new SampleEmoticon("┬──┬◡ﾉ(° -°ﾉ)", ["Other"]),
-  new SampleEmoticon("ᕕ( ᐛ )ᕗ", ["Happy"]),
-  new SampleEmoticon("༼ つ ◕_◕ ༽つ", ["Sad"]),
-  new SampleEmoticon("(☞ﾟヮﾟ)☞", ["Happy"]),
-  new SampleEmoticon("ʕ•ᴥ•ʔ", ["Other"]),
-  new SampleEmoticon("•ᴗ•", ["Happy"]),
-  new SampleEmoticon("ԅ(≖‿≖ԅ) ", ["Happy"]),
-  new SampleEmoticon("(╯°□°)╯︵ ʞooqǝɔɐℲ", ["Other"]),
-  new SampleEmoticon("ಠᴗಠ", ["Happy"]),
-  new SampleEmoticon("(•̀ᴗ•́)و ̑̑ ", ["Happy"]),
-  new SampleEmoticon("ಥ_ಥ", ["Sad"]),
+final emoticonsList = [
+  new Emoticon("¯\_(ツ)_/¯", ["Other"]),
+  new Emoticon("( ͡° ͜ʖ ͡°)", ["Happy"]),
+  new Emoticon("ಠ_ಠ", ["Sad"]),
+  new Emoticon("(╯°□°）╯︵ ┻━┻", ["Sad", "Other"]),
+  new Emoticon("┬──┬◡ﾉ(° -°ﾉ)", ["Other"]),
+  new Emoticon("ᕕ( ᐛ )ᕗ", ["Happy"]),
+  new Emoticon("༼ つ ◕_◕ ༽つ", ["Sad"]),
+  new Emoticon("(☞ﾟヮﾟ)☞", ["Happy"]),
+  new Emoticon("ʕ•ᴥ•ʔ", ["Other"]),
+  new Emoticon("•ᴗ•", ["Happy"]),
+  new Emoticon("ԅ(≖‿≖ԅ) ", ["Happy"]),
+  new Emoticon("(╯°□°)╯︵ ʞooqǝɔɐℲ", ["Other"]),
+  new Emoticon("ಠᴗಠ", ["Happy"]),
+  new Emoticon("(•̀ᴗ•́)و ̑̑ ", ["Happy"]),
+  new Emoticon("ಥ_ಥ", ["Sad"]),
 ];

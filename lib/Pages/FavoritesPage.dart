@@ -15,6 +15,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       ),
       body: ListViewBuilder(
         favoritesOnly: true,
+        includeTag: null,
       ),
     );
   }

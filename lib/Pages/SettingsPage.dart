@@ -26,12 +26,11 @@ class _SettingsPageState extends State<SettingsPage> {
               value: globalSortByUsage,
               onChanged: (value) async {
                 await SharedPreferencesManager().setSortByUsage(value);
-                print("Value changed");
-                setState((){
+                setState(() {
                   globalSortByUsage = value;
                 });
               },
-              activeTrackColor: Colors.lightBlueAccent, 
+              activeTrackColor: Colors.lightBlueAccent,
               activeColor: Colors.lightBlue,
             ),
           ),
@@ -44,11 +43,11 @@ class _SettingsPageState extends State<SettingsPage> {
               value: globalShowFavoritesOnTop,
               onChanged: (value) async {
                 await SharedPreferencesManager().setShowFavoritesOnTop(value);
-                setState((){
+                setState(() {
                   globalShowFavoritesOnTop = value;
                 });
               },
-              activeTrackColor: Colors.lightBlueAccent, 
+              activeTrackColor: Colors.lightBlueAccent,
               activeColor: Colors.lightBlue,
             ),
           ),
@@ -56,7 +55,10 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
             child: Text(
               "About",
-              style: TextStyle(fontSize: 15.0, color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.lightBlueAccent,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           ListTile(
@@ -75,10 +77,10 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(fontSize: 16.0),
             ),
             onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LicensePage()),
-            ),
-          ),  
+                  context,
+                  MaterialPageRoute(builder: (context) => LicensePage()),
+                ),
+          ),
         ],
       ),
     );
